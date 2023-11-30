@@ -1,0 +1,24 @@
+service:
+    name: sampleapp
+    identifier: sampleapp
+    serviceDefinition:
+        type: Kubernetes
+        spec:
+            manifests:
+                - manifest:
+                    identifier: sampleapp
+                    type: K8sManifest
+                    spec:
+                      store:
+                        type: Github
+                        spec:
+                            connectorRef: harnessgitconnector
+                            gitFetchType: Branch
+                            paths:
+                                - deployment.yaml
+                                - service.yaml
+                            repoName: sampleapp
+                            branch: main
+                        skipResourceVersioning: false
+                        enableDeclarativeRollback: false
+    gitOpsEnabled: false
